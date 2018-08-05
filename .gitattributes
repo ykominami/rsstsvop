@@ -1,0 +1,21 @@
+# Auto detect text files and perform LF normalization
+#* text=auto
+
+# 空白文字でくぎられる。前後の空白文字は無視される。
+# #で始まる行は無視される。
+# patternがパスに合致すれば、attributeが与えられる。
+# パスが複数のpatternに合致すれば、最後のpatternが適用される。
+# pattern matchは.gitignoreと同じ（ただし、否定ぱたーんは許されない。でぃれくとりに合致するぱたーんんは再帰的に適用されない
+# pattern attr1 attr2 ...
+
+# 後方互換性 crlfは以下のように解釈される
+# crlf text
+# -crlf -text
+# crlf=input eolf=lf
+
+# 例
+# *               text=auto
+# *.txt		text
+# *.vcproj	text eol=crlf
+# *.sh		text eol=lf
+# *.jpg		-text
