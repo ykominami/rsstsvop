@@ -1,0 +1,61 @@
+require 'rsstsvop'
+require 'yaml'
+
+require 'simpleoptparse'
+
+homedir = ENV['HOME']
+homedir ||= ENV['USERPROFILE']
+
+yamlfile_pn = Pathname.new( homedir ) / 'env-rsstsvop.yaml'
+
+opts = { "yaml" => yamlfile_pn }
+banner = "Usage: bundle exec ruby bin/rsstsvop [-f|--forced] [--rss|--tsv] [--yaml=yamlfile] index"
+
+Simpleoptparse::Simpleoptparse.parse( ARGV , opts , banner , Rsstsvop::VERSION , nil ){ |parser|
+    parser.on('-f' , '--forced'  ) { |x| opts["forced"] = true }
+    parser.on('--yaml=yamlfile'  ) { |x| opts["yaml"] = Pathname.new(x) }
+    parser.on('--rss'  ) { |x|
+      if opts["kind"]
+        opts["kind"] = :error
+      else
+        opts["kind"] = :rss
+      end
+    }
+    parser.on('--tsv'  ) { |x|
+      if opts["kind"]
+        opts["kind"] = :error
+      else
+        opts["kind"] = :tsv
+      end
+    }
+}
+
+if ( opts["kind"] == nil or opts["kind"] == :error ) or ARGV.size != 1
+  puts banner
+  exit 10
+else
+  opts["index"] = ARGV.pop.to_i
+end
+
+if opts["kind"] == :rss
+  rssop = Rsstsvop::Rssop.new( opts["index"] , opts["yaml"] )
+  if opts["forced"] or (File.exist?(rssop.fname) == false)
+    rssop.get.save 
+  end 
+  rssop.read_from_file.parse.print_all_items
+else
+  tsvop = Rsstsvop::Tsvop.new( opts["index"] , opts["yaml"] )
+  if opts["forced"] or (File.exist?(tsvop.fname) == false)
+    tsvop.get.save
+  end
+  tsvop.read_from_file_to_array.parse.print_table( "desc" )
+  #tsvop.read_from_file.parse.print_by_component
+  #tsvop.read_from_file_to_array.parse.print_key
+  #tsvop.read_from_file_to_array.parse.print_by_component
+  #tsvop.read_from_file_to_array.parse.print_by_version
+  #tsvop.read_from_file_to_array.parse.print_by_milestone
+  #tsvop.read_from_file_to_array.parse.print_by_type
+  #tsvop.read_from_file_to_array.parse.print_by_owner
+  #tsvop.read_from_file_to_array.parse.print_by_status
+  #tsvop.read_from_file_to_array.parse.print_by_reporter
+end
