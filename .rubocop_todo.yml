@@ -128,5 +128,6 @@ Style/NegatedIfElseCondition:
 # AllowedMethods: respond_to_missing?
 Style/OptionalBooleanParameter:
   Exclude:
-    - 'lib/rsstsvop/rss.rb'
-    - 'lib/rsstsvop/rssop.rb'
+    # - 'lib/rsstsvop/rss.rb'
+    # - 'lib/rsstsvop/rssop.rb'
+s
