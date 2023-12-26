@@ -8,7 +8,7 @@ git_source(:github) { |repo_name| "https://github.com/#{repo_name}" }
 gemspec
 
 gem 'bundler'
-gem 'rake', '~> 13.0'
+gem 'rake', '~> 13.1'
 gem 'rss'
 
 group :test, optional: true do
