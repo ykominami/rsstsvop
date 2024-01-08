@@ -25,14 +25,5 @@ Gem::Specification.new do |spec|
   spec.executables   = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
   spec.require_paths = ['lib']
 
-  spec.add_runtime_dependency 'bundler'
-  spec.add_runtime_dependency 'rake'
-  spec.add_runtime_dependency 'rss'
-  spec.add_runtime_dependency 'simpleoptparse'
-  spec.add_development_dependency 'rspec'
-  spec.add_development_dependency 'rubocop'
-  spec.add_development_dependency 'rubocop-performance'
-  spec.add_development_dependency 'rubocop-rake'
-  spec.add_development_dependency 'rubocop-rspec'
-  spec.add_development_dependency 'yard'
+  spec.metadata['rubygems_mfa_required'] = 'true'
 end

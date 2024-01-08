@@ -105,7 +105,7 @@ module Rsstsvop
     end
 
     def setup_data(hash, key)
-      return unless hash.size.zero?
+      return unless hash.empty?
 
       @csv_data.each do |data|
         hash[data[key]] ||= []
