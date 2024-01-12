@@ -1,16 +1,16 @@
 # frozen_string_literal: true
 
-require 'rss'
+require "rss"
 
 module Rsstsvop
   # RSS操作クラス
   class Rssop < Rsstsvop
     def initialize(index, yaml_pn)
       yaml_data = load_yaml(yaml_pn)
-      super(yaml_data['rss'][index])
+      super(yaml_data["rss"][index])
     end
 
-    def parse(validation = false)
+    def parse(validation: false)
       @rss = RSS::Parser.parse(@content, validation)
 
       self
@@ -24,7 +24,7 @@ module Rsstsvop
 
     def print_all_items
       @rss.items.map do |item|
-        puts item.pubDate.strftime('%Y/%m/%d')
+        puts item.pubDate.strftime("%Y/%m/%d")
         puts item.category.content
         puts item.title
         puts item.link

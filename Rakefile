@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
-require 'bundler/gem_tasks'
+require "bundler/gem_tasks"
 
 begin
-  require 'rspec/core/rake_task'
+  require "rspec/core/rake_task"
 rescue LoadError => e
   puts e.message
 end
@@ -13,7 +13,7 @@ rescue NameError, LoadError => e
   puts e.message
 end
 begin
-  require 'rubocop/rake_task'
+  require "rubocop/rake_task"
 rescue LoadError => e
   puts e.message
 end

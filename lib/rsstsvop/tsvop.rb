@@ -1,18 +1,18 @@
 # frozen_string_literal: true
 
-require 'csv'
+require "csv"
 
 module Rsstsvop
   # TSV操作クラス
   class Tsvop < Rsstsvop
     def initialize(index, yaml_pn)
       yaml_data = load_yaml(yaml_pn)
-      super(yaml_data['tsv'][index])
+      super(yaml_data["tsv"][index])
     end
 
     def csv_pars_sub(fields, val)
       if fields.size > @headers.size
-        puts 'error 1!'
+        puts "error 1!"
         raise
       elsif fields.size == @headers.size
         if val.empty?
@@ -22,7 +22,7 @@ module Rsstsvop
           end
           @parsed_data << hash
         else
-          puts 'error 2!'
+          puts "error 2!"
           raise
         end
       else
@@ -64,7 +64,7 @@ module Rsstsvop
         end
         if item_lines.nil?
           puts x
-          puts 'error a1'
+          puts "error a1"
           raise
         end
         item_lines << x
@@ -98,7 +98,7 @@ module Rsstsvop
       @csv_data = csv_parse(@content_array, { headers: true })
 
       @csv_data.each do |data|
-        @items_by_id[data['ticket']] = data
+        @items_by_id[data["ticket"]] = data
       end
 
       self
@@ -116,43 +116,43 @@ module Rsstsvop
     def print_key_values(hash, id_key)
       hash.each do |k, v|
         puts "* #{k}"
-        puts v.map { |x| format('#%s', x[id_key]) }.join(',')
+        puts v.map { |x| format("#%s", x[id_key]) }.join(",")
       end
     end
 
     def print_by_component
-      setup_data(@items_by_component, 'component')
-      print_key_values(@items_by_component, 'ticket')
+      setup_data(@items_by_component, "component")
+      print_key_values(@items_by_component, "ticket")
     end
 
     def print_by_version
-      setup_data(@items_by_version, 'version')
-      print_key_values(@items_by_version, 'ticket')
+      setup_data(@items_by_version, "version")
+      print_key_values(@items_by_version, "ticket")
     end
 
     def print_by_milestone
-      setup_data(@items_by_milestone, 'milestorn')
-      print_key_values(@items_by_milestone, 'ticket')
+      setup_data(@items_by_milestone, "milestorn")
+      print_key_values(@items_by_milestone, "ticket")
     end
 
     def print_by_type
-      setup_data(@items_by_type, 'type')
-      print_key_values(@items_by_type, 'ticket')
+      setup_data(@items_by_type, "type")
+      print_key_values(@items_by_type, "ticket")
     end
 
     def print_by_owner
-      setup_data(@items_by_owner, 'owner')
-      print_key_values(@items_by_owner, 'ticket')
+      setup_data(@items_by_owner, "owner")
+      print_key_values(@items_by_owner, "ticket")
     end
 
     def print_by_status
-      setup_data(@items_by_status, 'statur')
-      print_key_values(@items_by_status, 'ticket')
+      setup_data(@items_by_status, "statur")
+      print_key_values(@items_by_status, "ticket")
     end
 
     def print_by_reporter
-      setup_data(@items_by_reporter, 'reporter')
-      print_key_values(@items_by_reporter, 'ticket')
+      setup_data(@items_by_reporter, "reporter")
+      print_key_values(@items_by_reporter, "ticket")
     end
 
     def print_table(dir)
@@ -161,7 +161,7 @@ module Rsstsvop
       dirpn.mkdir
       fields = %w[ticket summary component version milestone type owner status created _changetime _reporter]
       table = @items_by_id.map do |_k, v|
-        (dirpn / "#{v['ticket']}.txt").write(v['_description'])
+        (dirpn / "#{v["ticket"]}.txt").write(v["_description"])
         fields.map { |x| v[x] }.join("\t")
       end.join("\n")
       puts table
@@ -169,13 +169,13 @@ module Rsstsvop
 
     # for debug
     def print_key
-      puts 'print_key'
+      puts "print_key"
       @items_by_component.each do |k, v|
         puts "* #{k}"
         if v && v[0] && v[0].keys
-          puts v[0].keys.join(',')
+          puts v[0].keys.join(",")
         else
-          puts ' - '
+          puts " - "
         end
       end
     end
