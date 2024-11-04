@@ -8,7 +8,7 @@ git_source(:github) { |repo_name| "https://github.com/#{repo_name}" }
 gemspec
 
 gem "bundler"
-gem "rake", "~> 13.1"
+gem "rake", "~> 13.2"
 gem "rss"
 
 group :test, optional: true do
@@ -20,5 +20,5 @@ group :test, optional: true do
 end
 
 group :development do
-  gem "yard", "~> 0.9.36"
+  gem "yard", "~> 0.9.37"
 end
