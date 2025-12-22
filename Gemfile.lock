@@ -20,7 +20,7 @@ GEM
     rainbow (3.1.1)
     rake (13.3.1)
     regexp_parser (2.11.3)
-    rexml (3.4.2)
+    rexml (3.4.4)
     rspec (3.13.2)
       rspec-core (~> 3.13.0)
       rspec-expectations (~> 3.13.0)
@@ -34,7 +34,7 @@ GEM
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.13.0)
     rspec-support (3.13.6)
-    rss (0.3.1)
+    rss (0.3.2)
       rexml
     rubocop (1.81.7)
       json (~> 2.3)
