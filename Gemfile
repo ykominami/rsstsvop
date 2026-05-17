@@ -20,5 +20,5 @@ group :test, optional: true do
 end
 
 group :development do
-  gem "yard", "~> 0.9.42"
+  gem "yard", "~> 0.9.43"
 end
